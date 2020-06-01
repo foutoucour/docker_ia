@@ -41,6 +41,18 @@ La description se fait dans un fichier `docker-compose.yml`.
 * `docker-compose down` pour arreter tous les services du fichier
 
 Reference: https://docs.docker.com/compose/
+### Volumes
+Les volumes sont des répertoires qui sont partagés entre le hôte et le container docker.
+Ils permettent de faire du statefull, pour des bases de données par exemple, mais aussi pour
+d'injecter des fichiers au runtime, comme des fichiers de configuration.
+Les volumes sont ici définis dans le fichier [docker-compose](https://docs.docker.com/compose/compose-file/#volume-configuration-reference)
+ mais ils pourraient être aussi défini à partir d'une commande [docker run -v](https://docs.docker.com/storage/volumes/)
+
+Ne pas confondre le `COPY` et `volume`
+* `COPY` copie la source dans l'image docker au build et ne sera pas dynamique. Le lien entre le hôte de la source est rompue.
+* Un volume est monté au runtime. Le lien entre le hôte de la source est préservé. Si un changement est fait dans le volume, 
+ajout, modification d'un fichier par exemple, le chagement sera visible et accessible des deux cotés, dans le container
+ mais aussi sur le hôte.
 
 ### Comment utiliser le service
 * build les services: `docker-compose build`
